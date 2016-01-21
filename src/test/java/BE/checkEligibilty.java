@@ -16,9 +16,16 @@ public class checkEligibilty {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
-        //driver.findElement(By.xpath("//div[@class='row']//a[contains(text(),'Individuals')])")).click();
-       boolean bValue =  driver.findElement(By.partialLinkText("Individuals")).isDisplayed();
+        boolean bValue =driver.findElement(By.partialLinkText("Individuals")).isDisplayed();
+     /*  boolean bValue =  driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']//button[@type='button']")).isDisplayed();;
         System.out.println(bValue);
+*/
+        if (bValue = true){
+            driver.findElement(By.partialLinkText("Individuals")).click();
+
+            driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']//button[@type='button']")).click();
+            System.out.println("true");
+        }
 
     }
 }
