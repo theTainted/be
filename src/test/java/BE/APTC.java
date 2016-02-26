@@ -23,8 +23,9 @@ public class APTC {
 
 
         public static void main(String[] args) {
-            String sIncome = "65000";
-            String sZip = "15480";
+            String sZip = "29021";
+            String sIncome = "23000";
+
             WebDriver driver = new FirefoxDriver();
             driver.get("https://be-qa.benefitalign.com/BrokerEngage/TCQA");
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -39,9 +40,7 @@ public class APTC {
                 driver.findElement(By.partialLinkText("Individuals")).click();
                 boolean bValue1 = driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']")).isDisplayed();
                 System.out.println(bValue1);
-           /* if (driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']//button[@type='button']")).isDisplayed()==true) {
-                driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']//button[@type='button']")).click();
-            }*/
+
                 try {
                     //  driver.findElement(By.xpath("//div[@id='dialogSep']//button[contains(text(),Continue)]")).click();
                     Actions actions = new Actions(driver);
@@ -56,33 +55,11 @@ public class APTC {
             functions functions = new functions();
             functions.enterZip(driver, sZip);
             String sZipCode = driver.findElement(By.id("Zip")).getAttribute("value");
+          //  functions.aptcSubscriber(driver);
+            functions.aptcSpouse(driver);
 
-            //input personal details.
-            driver.findElement(By.id("FirstName")).sendKeys("Test");
-            driver.findElement(By.xpath("//div[@id='Gender_chzn']")).click();
-            driver.findElement(By.xpath("//div[@id='Gender_chzn']//input[@type ='text']")).sendKeys("Male");
-            Actions actions = new Actions(driver);
-            actions.sendKeys(Keys.ENTER).build().perform();
-            driver.findElement(By.id("DateOfBirth")).click();
-            driver.findElement(By.id("DateOfBirth")).sendKeys("01/01/1980");
-            driver.findElement(By.id("addSpouse")).click();
-//Add Spouse
-            driver.findElement(By.id("AdditionalFamilyMembers_0__FirstName")).sendKeys("Missus");
-            driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']")).click();
-            driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']//input[@type ='text']")).sendKeys("Female");
-            // Actions actions = new Actions(driver);
-            actions.sendKeys(Keys.ENTER).build().perform();
-            driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).click();
-            driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).sendKeys("01/01/1986");
-            driver.findElement(By.id("addDependents")).click();
-            //Add Dependent
-            driver.findElement(By.id("AdditionalFamilyMembers_1__FirstName")).sendKeys("Child");
-            driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_1__Gender_chzn']")).click();
-            driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_1__Gender_chzn']//input[@type ='text']")).sendKeys("Female");
-            // Actions actions = new Actions(driver);
-            actions.sendKeys(Keys.ENTER).build().perform();
-            driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).click();
-            driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).sendKeys("01/01/2006");
+
+
 //click check eligibility
             driver.findElement(By.id("personalInfo")).click();
 //Enter Income
@@ -99,9 +76,9 @@ public class APTC {
             WebDriverWait wait = new WebDriverWait(driver, 10);
 
             WebElement element = wait.until(ExpectedConditions.visibilityOf(aptc));
-            String please = aptc.getText();
+            String sAPTC = aptc.getText();
             driver.quit();
-            functions.writeFile("BE");
+            functions.writeFile("BE",sZip,sAPTC);
 
 //---------------------------------------------------------------------------------------------------
   /*aptc from ffm site*/

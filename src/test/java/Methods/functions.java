@@ -24,7 +24,7 @@ public WebDriver driver;
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB).build().perform();
     }
-    public void writeFile (String sEnv){
+    public void writeFile (String sEnv,String sZipCode,String sAPTC){
 
         try {
             File file = new File("C:\\Syam\\APTC.txt");
@@ -45,4 +45,46 @@ public WebDriver driver;
             e.printStackTrace();
         }
     }
+
+    public void aptcSubscriber(WebDriver driver){
+
+        driver.findElement(By.id("FirstName")).sendKeys("Test");
+        driver.findElement(By.xpath("//div[@id='Gender_chzn']")).click();
+        driver.findElement(By.xpath("//div[@id='Gender_chzn']//input[@type ='text']")).sendKeys("Male");
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        driver.findElement(By.id("DateOfBirth")).click();
+        driver.findElement(By.id("DateOfBirth")).sendKeys("01/01/1980");
+
+
+
+        }
+public void aptcSpouse(WebDriver driver) {
+   aptcSubscriber(driver);
+    driver.findElement(By.id("addSpouse")).click();
+//Add Spouse
+    driver.findElement(By.id("AdditionalFamilyMembers_0__FirstName")).sendKeys("Missus");
+    driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']")).click();
+    driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']//input[@type ='text']")).sendKeys("Female");
+  Actions actions = new Actions(driver);
+    actions.sendKeys(Keys.ENTER).build().perform();
 }
+ public void aptcOneDependent(WebDriver driver){
+aptcSpouse(driver);
+
+     //Add Dependent
+     driver.findElement(By.id("AdditionalFamilyMembers_1__FirstName")).sendKeys("Child");
+     driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_1__Gender_chzn']")).click();
+     driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_1__Gender_chzn']//input[@type ='text']")).sendKeys("Female");
+   Actions actions = new Actions(driver);
+     actions.sendKeys(Keys.ENTER).build().perform();
+     driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).click();
+     driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).sendKeys("01/01/2006");
+ }
+public void checkEligibility(){
+    driver.findElement(By.id("personalInfo")).click();
+}
+
+
+    }
+
