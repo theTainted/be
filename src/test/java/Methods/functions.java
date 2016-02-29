@@ -3,12 +3,15 @@ package Methods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -18,11 +21,21 @@ public class functions {
 public WebDriver driver;
     public String sZipCode;
     public String sAPTC;
-    public void enterZip(WebDriver driver, String sZip){
+    public void enterZip(WebDriver driver, String sZip) {
         driver.findElement(By.id("Zip")).clear();
         driver.findElement(By.id("Zip")).sendKeys(sZip);
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.TAB).build().perform();
+        Select se = new Select(driver.findElement(By.id("spanCounty")));
+
+        List<WebElement> l = se.getOptions();
+        System.out.println(l.size());
+        if (l.size() > 2) {
+            driver.findElement(By.id("spanCounty")).click();
+            se.selectByIndex(1);
+
+            actions.sendKeys(Keys.RETURN).build().perform();
+        }
     }
     public void writeFile (String sEnv,String sZipCode,String sAPTC){
 

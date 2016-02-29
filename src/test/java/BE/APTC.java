@@ -23,8 +23,11 @@ public class APTC {
 
 
         public static void main(String[] args) {
-            String sZip = "97018";
-           String sIncome[] ={"29000","35000","41000","52000","65000"};
+            String sZip = "46033";
+       //String sIncome[] ={"17000","20000","25000","30000","40000"};
+        //   String sIncome[] ={"23000","28000","35000","42000","48000"};
+          String sIncome[] ={"29000","35000","41000","52000","65000"};
+
 
 for (int i=0;i<=4;i++) {
 
@@ -57,9 +60,9 @@ for (int i=0;i<=4;i++) {
     functions functions = new functions();
     functions.enterZip(driver, sZip);
     String sZipCode = driver.findElement(By.id("Zip")).getAttribute("value");
-//            functions.aptcSubscriber(driver);
-//    functions.aptcSpouse(driver);
-      functions.aptcOneDependent(driver);
+//functions.aptcSubscriber(driver);
+ //functions.aptcSpouse(driver);
+ functions.aptcOneDependent(driver);
 
 
 //click check eligibility
@@ -80,7 +83,7 @@ for (int i=0;i<=4;i++) {
 
     WebElement element = wait.until(ExpectedConditions.visibilityOf(aptc));
     String sAPTC = aptc.getText();
-    driver.quit();
+  driver.quit();
     functions.writeFile("BE", sZip, sAPTC);
 }
 //---------------------------------------------------------------------------------------------------
