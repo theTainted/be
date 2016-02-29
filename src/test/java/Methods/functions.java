@@ -68,10 +68,12 @@ public void aptcSpouse(WebDriver driver) {
     driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']//input[@type ='text']")).sendKeys("Female");
   Actions actions = new Actions(driver);
     actions.sendKeys(Keys.ENTER).build().perform();
+    driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).click();
+    driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).sendKeys("01/01/1986");
 }
  public void aptcOneDependent(WebDriver driver){
 aptcSpouse(driver);
-
+     driver.findElement(By.id("addDependents")).click();
      //Add Dependent
      driver.findElement(By.id("AdditionalFamilyMembers_1__FirstName")).sendKeys("Child");
      driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_1__Gender_chzn']")).click();
