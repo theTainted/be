@@ -57,6 +57,7 @@ public class APTC {
             String sZipCode = driver.findElement(By.id("Zip")).getAttribute("value");
           //  functions.aptcSubscriber(driver);
             functions.aptcSpouse(driver);
+            functions.aptcOneDependent(driver);
 
 
 
