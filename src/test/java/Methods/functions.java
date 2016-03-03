@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class functions {
 public WebDriver driver;
-    public String sZipCode;
+     public String sZipCode;
     public String sAPTC;
     public void enterZip(WebDriver driver, String sZip) {
         driver.findElement(By.id("Zip")).clear();
@@ -97,9 +98,17 @@ aptcSpouse(driver);
      driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).sendKeys("01/01/2006");
  }
 public void checkEligibility(){
+
     driver.findElement(By.id("personalInfo")).click();
+}
+    public WebDriver initialise(WebDriver driver){
+        //WebDriver driver = new FirefoxDriver();
+        driver.get("https://be-qa.benefitalign.com/BrokerEngage/TCQA");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        return driver;
+    }
 }
 
 
-    }
 

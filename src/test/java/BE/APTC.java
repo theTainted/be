@@ -10,19 +10,15 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by subramanian.s on 2/26/2016.
  */
 
-    /**
-     * Created by subramanian.s on 1/21/2016.
-     */
 public class APTC {
 
 
         public static void main(String[] args) {
+            functions functions = new functions();
             String sZip = "46033";
        //String sIncome[] ={"17000","20000","25000","30000","40000"};
         //   String sIncome[] ={"23000","28000","35000","42000","48000"};
@@ -31,11 +27,12 @@ public class APTC {
 
 for (int i=0;i<=4;i++) {
 
-    WebDriver driver = new FirefoxDriver();
-    driver.get("https://be-qa.benefitalign.com/BrokerEngage/TCQA");
+   WebDriver driver = new FirefoxDriver();
+      functions.initialise(driver);
+ /*driver.get("https://be-qa.benefitalign.com/BrokerEngage/TCQA");
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     driver.manage().window().maximize();
-
+*/
     boolean bValue = driver.findElement(By.partialLinkText("Individuals")).isDisplayed();
      /*  boolean bValue =  driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']//button[@type='button']")).isDisplayed();;
         System.out.println(bValue);
@@ -57,7 +54,7 @@ for (int i=0;i<=4;i++) {
         }
 
     }
-    functions functions = new functions();
+
     functions.enterZip(driver, sZip);
     String sZipCode = driver.findElement(By.id("Zip")).getAttribute("value");
 //functions.aptcSubscriber(driver);
@@ -84,13 +81,15 @@ for (int i=0;i<=4;i++) {
     WebElement element = wait.until(ExpectedConditions.visibilityOf(aptc));
     String sAPTC = aptc.getText();
   driver.quit();
+
+
     functions.writeFile("BE", sZip, sAPTC);
 }
 //---------------------------------------------------------------------------------------------------
   /*aptc from ffm site*/
 
 //----------------------------------------------------------------------------------------------------------------
-
-
-        }
     }
+
+ }
+
