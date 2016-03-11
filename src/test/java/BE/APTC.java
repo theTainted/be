@@ -17,12 +17,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class APTC {
 
 
-        public static void main(String[] args) {
+        public static void main(String[] args) throws InterruptedException {
             functions functions = new functions();
-            String sZip = "46033";
-       //String sIncome[] ={"17000","20000","25000","30000","40000"};
-        //   String sIncome[] ={"23000","28000","35000","42000","48000"};
-          String sIncome[] ={"29000","35000","41000","52000","65000"};
+            String sZip = "07001";
+            //String sIncome[] ={"17000","20000","25000","30000","40000"};
+    String sIncome[] ={"23000","28000","35000","42000","48000"};
+       // String sIncome[] ={"29000","35000","41000","52000","65000"};
 
 
 for (int i=0;i<=4;i++) {
@@ -34,9 +34,8 @@ for (int i=0;i<=4;i++) {
     driver.manage().window().maximize();
 */
     boolean bValue = driver.findElement(By.partialLinkText("Individuals")).isDisplayed();
-     /*  boolean bValue =  driver.findElement(By.xpath("//div[@class='ui-dialog-buttonset']//button[@type='button']")).isDisplayed();;
-        System.out.println(bValue);
-*/
+
+
     if (bValue = true) {
 
         driver.findElement(By.partialLinkText("Individuals")).click();
@@ -58,32 +57,46 @@ for (int i=0;i<=4;i++) {
     functions.enterZip(driver, sZip);
     String sZipCode = driver.findElement(By.id("Zip")).getAttribute("value");
 //functions.aptcSubscriber(driver);
- //functions.aptcSpouse(driver);
- functions.aptcOneDependent(driver);
+// functions.aptcSpouse(driver);
+functions.aptcOneDependent(driver);
 
-
+/*
 //click check eligibility
-    driver.findElement(By.id("personalInfo")).click();
+    driver.findElement(By.id("personalInfo")).click();*/
 //Enter Income
 
-    driver.findElement(By.id("EstimatedIncome")).sendKeys(sIncome[i]);
+   driver.findElement(By.id("EstimatedIncome")).sendKeys(sIncome[i]);
+/*
 //Calculate APTC
-    driver.findElement(By.id("sudsidyCalcuatorBtn")).click();
-//Get APTC value
-    boolean sEstimatedAPTC = driver.findElement(By.xpath("//table[@class='minimal_table']")).isDisplayed();
+    driver.findElement(By.id("sudsidyCalcuatorBtn")).click();*/
+
+    //click check eligibility
+    driver.findElement(By.id("personalInfo")).click();
+/*Get APTC value
+    boolean sEstimatedAPTC = driver.findElement(By.xpath("//table[@class='minimal_table']")).isDisplayed();*/
 
     //driver.findElement(By.id("lblAPTCMonthly")).getAttribute("span");
+/*
+    if (driver.findElement(By.id("mesgSpan")).isDisplayed()){
+        WebElement text =driver.findElement(By.id("mesgSpan"));
+        String zero = text.getText();
+        functions.writeFile("BE",sZip,zero);
+    }
+    */
+   // else {
+        WebElement aptc = driver.findElement(By.xpath("//div[@id='main2']//div[@class='alert alert-info']/div/b"));
+                //driver.findElement(By.id("alert alert-info"));
+        //driver.findElement(By.id("lblAPTCMonthly"));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(aptc));
+        String sAPTC = aptc.getText();
+        System.out.println(sAPTC);
+        driver.quit();
 
 
-    WebElement aptc = driver.findElement(By.id("lblAPTCMonthly"));
-    WebDriverWait wait = new WebDriverWait(driver, 10);
-
-    WebElement element = wait.until(ExpectedConditions.visibilityOf(aptc));
-    String sAPTC = aptc.getText();
-  driver.quit();
-
-
-    functions.writeFile("BE", sZip, sAPTC);
+        functions.writeFile("BE", sZip, sAPTC);
+   // }
 }
 //---------------------------------------------------------------------------------------------------
   /*aptc from ffm site*/

@@ -68,14 +68,23 @@ public WebDriver driver;
         Actions actions = new Actions(driver);
         actions.sendKeys(Keys.ENTER).build().perform();
         driver.findElement(By.id("DateOfBirth")).click();
-        driver.findElement(By.id("DateOfBirth")).sendKeys("01/01/1980");
-
-
-
+        driver.findElement(By.id("DateOfBirth")).sendKeys("03/25/1980");
         }
-public void aptcSpouse(WebDriver driver) {
+public void aptcSpouse(WebDriver driver) throws InterruptedException {
    aptcSubscriber(driver);
-    driver.findElement(By.id("addSpouse")).click();
+    Thread.sleep(3000);
+    /* to get focus on the add spouse */
+    Actions focus = new Actions(driver);
+    focus.sendKeys(Keys.TAB).build().perform();
+   WebElement addSpouse =driver.findElement(By.id("addSpouse"));
+    focus.click(addSpouse).build().perform();
+
+
+    /*------------------------------------------------*/
+
+
+  //  driver.findElement(By.id("addSpouse")).click();
+   // driver.findElement(By.xpath("//div[@class='widget_footer text-right']/span[@class='hideAddRemoveButton']/a[@id='addSpouse']/i")).click();
 //Add Spouse
     driver.findElement(By.id("AdditionalFamilyMembers_0__FirstName")).sendKeys("Missus");
     driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']")).click();
@@ -83,11 +92,18 @@ public void aptcSpouse(WebDriver driver) {
   Actions actions = new Actions(driver);
     actions.sendKeys(Keys.ENTER).build().perform();
     driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).click();
-    driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).sendKeys("01/01/1986");
+    driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).sendKeys("03/25/1986");
 }
- public void aptcOneDependent(WebDriver driver){
+ public void aptcOneDependent(WebDriver driver) throws InterruptedException {
 aptcSpouse(driver);
-     driver.findElement(By.id("addDependents")).click();
+     Thread.sleep(5000);
+     Actions moveTo = new Actions(driver);
+     moveTo.sendKeys(Keys.TAB).build().perform();
+     moveTo.sendKeys(Keys.TAB).build().perform();
+     WebElement addDependents =driver.findElement(By.id("addDependents"));
+     moveTo.click(addDependents).build().perform();
+     //focus.click(addDependents).build().perform();
+    // driver.findElement(By.id("addDependents")).click();
      //Add Dependent
      driver.findElement(By.id("AdditionalFamilyMembers_1__FirstName")).sendKeys("Child");
      driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_1__Gender_chzn']")).click();
@@ -95,7 +111,7 @@ aptcSpouse(driver);
    Actions actions = new Actions(driver);
      actions.sendKeys(Keys.ENTER).build().perform();
      driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).click();
-     driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).sendKeys("01/01/2006");
+     driver.findElement(By.id("AdditionalFamilyMembers_1__DateOfBirth")).sendKeys("03/25/2006");
  }
 public void checkEligibility(){
 
@@ -108,6 +124,10 @@ public void checkEligibility(){
         driver.manage().window().maximize();
         return driver;
     }
+
+/* for the latest change #10325*/
+
+
 }
 
 
