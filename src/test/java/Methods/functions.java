@@ -78,8 +78,6 @@ public void aptcSpouse(WebDriver driver) throws InterruptedException {
     focus.sendKeys(Keys.TAB).build().perform();
    WebElement addSpouse =driver.findElement(By.id("addSpouse"));
     focus.click(addSpouse).build().perform();
-
-
     /*------------------------------------------------*/
 
 
@@ -89,11 +87,12 @@ public void aptcSpouse(WebDriver driver) throws InterruptedException {
     driver.findElement(By.id("AdditionalFamilyMembers_0__FirstName")).sendKeys("Missus");
     driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']")).click();
     driver.findElement(By.xpath("//div[@id='AdditionalFamilyMembers_0__Gender_chzn']//input[@type ='text']")).sendKeys("Female");
-  Actions actions = new Actions(driver);
+    Actions actions = new Actions(driver);
     actions.sendKeys(Keys.ENTER).build().perform();
     driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).click();
     driver.findElement(By.id("AdditionalFamilyMembers_0__DateOfBirth")).sendKeys("03/25/1986");
 }
+
  public void aptcOneDependent(WebDriver driver) throws InterruptedException {
 aptcSpouse(driver);
      Thread.sleep(5000);
